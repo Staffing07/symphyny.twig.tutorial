@@ -1,0 +1,99 @@
+How I got here - see youtube.com/watch?v=t5ZedKnWX9E
+
+Symfony docs -  and thttps://symfony.com/doc/current/index.html#gsc.tab=0
+
+
+Pre-reqs
+    Need Xampp
+    Downloaded composer
+    Gitbash
+
+Open htdocs folder e.g. C:\xampp\htdocs in gitbash
+Type composer
+If composer working will see a bunch of commands  
+
+To create project type " composer create-project symfony/skeleton symphart "     (symphart is name of project)
+This creates the folder inside the htdocs
+
+Go to http://localhost/symphart  - should get a directory listing
+http://localhost/symphart/public - should get conf all running ok  
+
+To change the vhost to symphart.test 
+Edit the httpd-vhosts.conf in notepad and copy one of the commented paragraph blocks 
+Then edit it to read 
+
+<VirtualHost *:80>
+    DocumentRoot "C:/xampp/htdocs/symphart/public"
+    ServerName  "symphart.test"
+</VirtualHost>
+
+Open notepad as administrator to edit the hosts file 
+Navigate to Windows/System32/drivers/etc 
+
+Enter the entry 
+
+127.0.0.1 symphart.test 
+
+Restart apache in xampp
+
+Navigate to http://symphart.test - should get the application
+
+open app in vscode
+
+in GitBash navigate to the project folder e.g. symphart 
+
+Once in the correct folder type code . to open this folder in Studio Code
+
+Create general .htaccess file in public folder - using the text in this project
+
+in terminal when in project folder also typed composer require annotations
+
+and
+
+composer require twig 
+
+composer require doctrine maker
+
+to create the database 
+
+php bin/console doctrine:database:create 
+
+then navigate to the .env file to input the dbase settings - default user is root with no password
+
+then need to create an entity fo each thing
+
+php bin/console make:entity Article
+
+This creates the thing (in this case Article) in the Entity folder.  It also brings in everything else needed to reference it
+
+Add any other fields you want as shown in the Entity/Article.php file
+
+php bin/console doctrine:migrations:diff - this is to create the schema
+
+php bin/console doctrine:migrations:migrate and select yes
+
+Go to phpmyAdmin - you will see the fields and everything created through the terminal now in there
+
+if you need to change anything in the db can either do it manually or change the article.php to include them and then run the migrations:diff and the migrations:migrate commands
+
+
+
+---
+Get and Set fields mean you can get and set fields within the controller.
+
+
+php bin/console doctrine:query:sql 'SELECT * FROM article'
+
+
+in bash terminal - 
+composer require form
+
+
+
+
+
+Process for creating Button like Show Delete Edit
+
+ArticleController.php 
+Create the form functions here
+
